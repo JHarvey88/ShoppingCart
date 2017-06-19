@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  testing:
+    image: test
+    links:
+    - mysql-server
+    ports:
+    - 8080:8080
+  mysql-server:
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    restart: always
+    volumes:
+      - "./src/exported:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: john
+      MYSQL_USER: john
+      MYSQL_PASSWORD: john
+      MYSQL_DATABASE: db_example
